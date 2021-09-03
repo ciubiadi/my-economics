@@ -1,0 +1,117 @@
+<div class="container d-flex justify-content-center">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div *ngIf="wallet">
+        <h2>{{wallet.name | uppercase}} Details</h2>
+        <!-- <div><span>id: </span>{{wallet.id}}</div> -->
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <h1 style="text-align:center">Balance : <span>231 RON</span></h1>
+      <div class="flex-container" fxLayout="row" fxLayoutAlign="space-around center">
+        <div class="totals-column">
+          <h2>Total Month Expenses</h2>
+          <p>20RON</p>
+        </div>
+        <div class="totals-column">
+          <h2>Total Month Income</h2>
+          <p>3RON</p>
+        </div>
+      </div>
+      <hr>
+      <div class="transactions-list">
+        <mat-tab-group mat-align-tabs="start" color="accent" backgroundColor="primary">
+          <mat-tab label="Expenses">
+            <ul>
+              <li>50RON - Skin LoL</li>
+              <li>20RON - Mancare Lidl</li>
+              <li>168RON - Chitara Electro-Acustica</li>
+              <li>320RON - Korg Pa2x Pro Elite Sintetizator hibrid</li>
+              <li>50RON - Amplificator Chitara Electro Acustica</li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Incomes">
+            <ul>
+              <li>321RON - Skin LoL</li>
+              <li>22RON - Mancare Lidl</li>
+              <li>1612RON - Chitara Electro-Acustica</li>
+              <li>320RON - Korg Pa2x Pro Elite Sintetizator hibrid</li>
+              <li>52RON - Amplificator Chitara Electro Acustica</li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="All">
+            <ul>
+              <li>30RON - Skin LoL</li>
+              <li>20RON - Mancare Lidl</li>
+              <li>168RON - Chitara Electro-Acustica</li>
+              <li>320RON - Korg Pa2x Pro Elite Sintetizator hibrid</li>
+              <li>50RON - Amplificator Chitara Electro Acustica</li>
+            </ul>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel style="border: 1px solid red;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Expenses
+            </mat-panel-title>
+            <mat-panel-description>
+              Type an expense
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput>
+          </mat-form-field>
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Value</mat-label>
+            <input matInput type="number" min="0">
+          </mat-form-field>
+
+          <!-- <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
+          </mat-form-field>
+          <mat-datepicker #picker></mat-datepicker> -->
+          <!-- <button mat-stroked-button color="primary">Add</button> -->
+        </mat-expansion-panel>
+
+        <mat-expansion-panel style="border: 1px solid green;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Incomes
+            </mat-panel-title>
+            <mat-panel-description>
+              Type an income
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput>
+          </mat-form-field>
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Value</mat-label>
+            <input matInput type="number" min="0">
+          </mat-form-field>
+
+          <!-- <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
+          </mat-form-field>
+          <mat-datepicker #picker></mat-datepicker> -->
+      
+          <!-- <button mat-raised-button color="primary">Add</button> -->
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="goBack()">go back</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

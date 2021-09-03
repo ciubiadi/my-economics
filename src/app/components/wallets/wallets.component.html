@@ -1,0 +1,8 @@
+<h1 class="wallets-title">My Wallets</h1>
+<div *ngFor="let wallet of wallets" class="wallets-item">
+    <div>
+      <h2>{{ wallet.name }}</h2>
+      <p>{{ wallet.description }}</p>
+    </div>
+    <button mat-stroked-button color="primary" routerLink="/wallets/{{ wallet.id }}">Open Wallet</button>
+</div>

@@ -1,0 +1,18 @@
+.wallets-list {
+    margin-top: 1.5em;
+  }
+  
+  .wallets-title {
+    text-align: center;
+  }
+  
+  .wallets-list .wallets-item {
+    margin: 10px;
+    padding: 10px;
+    background-color: antiquewhite;
+    border: 2px solid blue;
+    border-radius: 10px;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

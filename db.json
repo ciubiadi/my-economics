@@ -1,58 +1,66 @@
 {
-    "wallets": [
-        {  
-            "id": 1,  
-            "name": "Wallet for holidays",  
-            "owner": "Albert",
-            "description": "Try to grow it, keep it safe!"  
-        }, {  
-            "id": 2,  
-            "name": "Wallet for household",  
-            "owner": "Robert",  
-            "description": "From this source the household will be taken care of"  
-        }, {  
-            "id": 3,  
-            "name": "Wallet for investments",  
-            "owner": "Mihaa",  
-            "description": "To multily your money, you need to invest them"  
-        }
-    ],
-    "transactions": [
-        {
-            "id":1,
-            "type": "expense",
-            "walletId": 2,
-            "date": "",
-            "description": "some",
-            "amount": 23,
-            "currency": "EUR"
-        },
-        {
-            "id":2,
-            "type": "income",
-            "walletId": 3,
-            "date": "",
-            "description": "",
-            "amount": 18.24,
-            "currency": "RON"
-        },
-        {
-            "id":3,
-            "type": "income",
-            "walletId": 3,
-            "date": "",
-            "description": "",
-            "amount": 18.24,
-            "currency": "RON"
-        },
-        {
-            "id":4,
-            "type": "income",
-            "walletId": 3,
-            "date": "",
-            "description": "",
-            "amount": 18.24,
-            "currency": "RON"
-        }
-    ]
+  "wallets": [
+    {
+      "id": 1,
+      "name": "Wallet for holidays",
+      "owner": "Albert",
+      "description": "Try to grow it, keep it safe!"
+    },
+    {
+      "id": 2,
+      "name": "Wallet for household",
+      "owner": "Robert",
+      "description": "From this source the household will be taken care of"
+    },
+    {
+      "id": 3,
+      "name": "Wallet for investments",
+      "owner": "Mihaa",
+      "description": "To multily your money, you need to invest them"
+    },
+    {
+      "id": 4,
+      "name": "Wallet for Test",
+      "owner": "asdasd",
+      "description": "asdas"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "type": "expense",
+      "walletId": 2,
+      "date": "",
+      "description": "some",
+      "amount": 23,
+      "currency": "EUR"
+    },
+    {
+      "id": 2,
+      "type": "income",
+      "walletId": 3,
+      "date": "",
+      "description": "",
+      "amount": 18.24,
+      "currency": "RON"
+    },
+    {
+      "id": 3,
+      "type": "income",
+      "walletId": 3,
+      "date": "",
+      "description": "",
+      "amount": 18.24,
+      "currency": "RON"
+    },
+    {
+      "id": 4,
+      "type": "income",
+      "walletId": 3,
+      "date": "",
+      "description": "",
+      "amount": 18.24,
+      "currency": "RON"
+    }
+  ]
 }

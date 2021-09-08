@@ -83,8 +83,10 @@ export class AppComponent {
   }
   
   onEdit(wallet: any) {
-    // this.api.showAdd = false;
-    // this.api.showUpdate = true;
+    this.api.setShowAdd(false);
+    this.api.setShowUpdate(true);
+    this.showAdd = this.api.getShowAdd();
+    this.showUpdate = this.api.getShowUpdate();
     this.walletModelObj.id = wallet.id;
     this.formValue.controls['walletName'].setValue(wallet.name);
     this.formValue.controls['ownerName'].setValue(wallet.owner);
@@ -93,6 +95,10 @@ export class AppComponent {
 
   clickAddWallet() {
     this.formValue.reset();
+    this.api.setShowAdd(true);
+    this.api.setShowUpdate(false);
+    this.showAdd = this.api.getShowAdd();
+    this.showUpdate = this.api.getShowUpdate();
     // this.api.showAdd = true;
     // this.api.showUpdate = false;
   }

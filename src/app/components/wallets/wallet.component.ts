@@ -59,4 +59,5 @@ export class WalletsComponent implements OnInit {
   // callOnEdit(): void {
   //   this.editEvent.next('')
   // }
+
 }

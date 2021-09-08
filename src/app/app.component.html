@@ -1,8 +1,9 @@
 <app-header></app-header>
+<h1 class="wallets-title">My Wallets</h1>
 <div class="wallets-list" fxLayout="column" fxLayoutAlign="space-evenly stretch" >
   <router-outlet></router-outlet>
 </div>
-<button mat-fab color="primary" aria-label="Example icon button with a delete icon" style="position: fixed; bottom: 15px; right: 15px;" 
+<button (click)="clickAddWallet()" mat-fab color="primary" aria-label="Example icon button with a delete icon" style="position: fixed; bottom: 15px; right: 15px;" 
 data-toggle="modal" data-target="#exampleModal">
   <mat-icon>add</mat-icon>
 </button>
@@ -36,7 +37,8 @@ data-toggle="modal" data-target="#exampleModal">
       </div>
       <div class="modal-footer">
         <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" (click)="postWalletDetails()">Add Wallet</button>
+        <button type="button" *ngIf="showUpdate" class="btn btn-info text-white" (click)="saveWalletDetails()">Edit Wallet</button>
+        <button type="button" *ngIf="showAdd" class="btn btn-success" (click)="postWalletDetails()">Add Wallet</button>
       </div>
     </div>
   </div>

@@ -1,12 +1,9 @@
-<h1 class="wallets-title">My Wallets</h1>
-<div *ngFor="let wallet of walletsData" class="wallets-item">
-  <div>
-    <h2>{{ wallet.name }}</h2>
-    <p>{{ wallet.description }}</p>
-  </div>
+<mat-card *ngFor="let wallet of walletsData" class="wallets-item">
+  <mat-card-title>{{ wallet.name }}</mat-card-title>
+  <mat-card-subtitle>{{ wallet.description }}</mat-card-subtitle>
   <button mat-stroked-button color="primary" routerLink="/wallets/{{ wallet.id }}" style="float:left">Open Wallet</button>
-  <div class="actions">
-      <button data-toggle="modal" data-target="#exampleModal" mat-stroked-button color="accent">Edit</button>
-      <button mat-raised-button color="warn" (click)="deleteWallet(wallet)">Delete</button>
-  </div>
-</div>
+  <mat-card-actions align="end" class="actions">
+    <button mat-button (click)="onEdit(wallet)" data-toggle="modal" data-target="#exampleModal" mat-stroked-button color="accent">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteWallet(wallet)">Delete</button>
+  </mat-card-actions>
+</mat-card>

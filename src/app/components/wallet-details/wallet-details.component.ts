@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Wallet, WalletsService } from 'src/app/wallets.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ApiService } from 'src/app/shared/api.service';
 
 interface Transaction {
   item: string;
@@ -30,6 +31,7 @@ export class WalletDetailsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private walletsService: WalletsService,
+    private api : ApiService,
     private route: ActivatedRoute,
     private location: Location
     ) { 
@@ -48,6 +50,10 @@ export class WalletDetailsComponent implements OnInit {
     this.walletsService.getWallet(id)
       .subscribe(wallet => this.wallet = wallet);
   }
+
+  // getWallet(): void {
+
+  // }
 
   goBack(): void {
     this.location.back();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Wallet, WalletsService } from '../../wallets.service';
@@ -10,6 +10,9 @@ import { ApiService } from '../../shared/api.service';
   styleUrls: ['./wallets.component.scss']
 })
 export class WalletsComponent implements OnInit {
+  @Output('onEdit') editEvent = new EventEmitter<any>();
+
+  @Input() showAdd!: boolean;
   // wallets: Wallet[] = [];
 
   walletsData !: any;
@@ -21,16 +24,16 @@ export class WalletsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllWallets();
+    console.log(this.showAdd);
     // this.getWallets();
   }
-  
-  // getWallets(): void {
-  //   this.walletsService.getWallets().subscribe( (res) => {
-  //     this.wallets = res;
-  //   });
-  // }
 
-  getAllWallets() {
+  onEdit(wallet: any){
+    this.api.emitChange(wallet);
+  
+   }
+
+   getAllWallets() {
     this.api.getWallets().subscribe(res => {
       this.walletsData = res;
     })
@@ -42,6 +45,18 @@ export class WalletsComponent implements OnInit {
       this.getAllWallets();
     });
   }
-
   
+  // getWallets(): void {
+  //   this.walletsService.getWallets().subscribe( (res) => {
+  //     this.wallets = res;
+  //   });
+  // }
+
+  // editWallet(wallet: any) {
+  //   console.log(wallet);
+  // }
+
+  // callOnEdit(): void {
+  //   this.editEvent.next('')
+  // }
 }

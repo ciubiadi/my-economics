@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { WalletModel } from './wallet.model';
+import { WalletModel } from './models/wallet.model';
 import { ApiService } from './shared/api.service';
 
 @Component({
@@ -11,13 +11,20 @@ import { ApiService } from './shared/api.service';
 export class AppComponent {
   title = 'my-economics';
   walletsData !: any;
-
   formValue !: FormGroup;
   walletModelObj : WalletModel = new WalletModel();
 
-  constructor(private formBuilder: FormBuilder,
-    private api : ApiService) {
+  showAdd!: boolean;
+  showUpdate!: boolean;
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private api : ApiService
+    ) {
+      api.editWallet$.subscribe(
+        wallet => {
+            this.onEdit(wallet);
+        });
   }
 
   ngOnInit(): void {
@@ -60,9 +67,33 @@ export class AppComponent {
     })
   }
 
-  // onEdit(wallet: any) {
-  //   this.formValue.controls['walletName'].setValue(wallet.name);
-  //   this.formValue.controls['ownerName'].setValue(wallet.owner);
-  //   this.formValue.controls['walletDescription'].setValue(wallet.description);
-  // }
+  saveWalletDetails(){
+    this.walletModelObj.name = this.formValue.value.walletName;
+    this.walletModelObj.owner = this.formValue.value.ownerName;
+    this.walletModelObj.description = this.formValue.value.walletDescription;
+
+    this.api.updateWallet(this.walletModelObj, this.walletModelObj.id)
+    .subscribe(res => {
+      alert("Updated Succesfully");
+      let ref = document.getElementById('cancel');
+      ref?.click() ;
+      this.formValue.reset();
+      this.getAllWallets();
+    });
+  }
+  
+  onEdit(wallet: any) {
+    // this.api.showAdd = false;
+    // this.api.showUpdate = true;
+    this.walletModelObj.id = wallet.id;
+    this.formValue.controls['walletName'].setValue(wallet.name);
+    this.formValue.controls['ownerName'].setValue(wallet.owner);
+    this.formValue.controls['walletDescription'].setValue(wallet.description);
+  }
+
+  clickAddWallet() {
+    this.formValue.reset();
+    // this.api.showAdd = true;
+    // this.api.showUpdate = false;
+  }
 }

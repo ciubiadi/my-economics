@@ -48,12 +48,12 @@ export enum CurrencyTypes {
   RON = 'RON'
 }
 
-export interface Transaction {
-  id: number;
-  type: TransactionTypes;
-  walletId: number;
-  date: Date;
-  description: string;
-  amount: number;
-  currency: CurrencyTypes
-}
+// export interface Transaction {
+//   id: number;
+//   type: TransactionTypes;
+//   walletId: number;
+//   date: Date;
+//   description: string;
+//   amount: number;
+//   currency: CurrencyTypes
+// }

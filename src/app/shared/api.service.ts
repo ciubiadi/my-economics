@@ -12,7 +12,6 @@ export class ApiService {
   constructor(private http : HttpClient) { }
 
   showAdd!: boolean;
-  showUpdate!: boolean;
 
   private emitChangeSource = new Subject<any>();
   editWallet$ = this.emitChangeSource.asObservable();
@@ -21,18 +20,10 @@ export class ApiService {
     return this.showAdd;
   }
 
-  getShowUpdate() {
-    return this.showUpdate;
-  }
-
   setShowAdd(newValue: any) {
     this.showAdd = newValue;
   }
-
-  setShowUpdate(newValue: any) {
-    this.showUpdate = newValue;
-  }
-
+  
   emitChange(change: any) {
       this.emitChangeSource.next(change);
   }

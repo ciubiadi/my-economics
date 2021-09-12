@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Wallet, WalletsService } from '../../wallets.service';
+import { WalletsService } from '../../services/wallets.service';
 import { ApiService } from '../../shared/api.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { WalletModel } from 'src/app/models/wallet.model';
 
 @Component({
   selector: 'app-wallets',
@@ -10,54 +12,92 @@ import { ApiService } from '../../shared/api.service';
   styleUrls: ['./wallets.component.scss']
 })
 export class WalletsComponent implements OnInit {
-  @Output('onEdit') editEvent = new EventEmitter<any>();
-
-  @Input() showAdd!: boolean;
-  // wallets: Wallet[] = [];
-
+  
+  formValue !: FormGroup;
+  walletModelObj : WalletModel = new WalletModel();
   walletsData !: any;
+  // walletsData: WalletModel[] = [];
+  showAdd!: boolean;
 
   constructor(
-    // private walletsService: WalletsService,
-    private api : ApiService
+    private walletsService: WalletsService,
+    private formBuilder: FormBuilder,
     ) { }
 
   ngOnInit(): void {
     this.getAllWallets();
-    console.log(this.showAdd);
-    // this.getWallets();
+    this.formValue =  this.formBuilder.group({
+      walletName : [''],
+      ownerName : [''],
+      walletDescription : [''] 
+    })
   }
 
-  onEdit(wallet: any){
-    this.api.emitChange(wallet);
-  
-   }
-
-   getAllWallets() {
-    this.api.getWallets().subscribe(res => {
+  getAllWallets() {
+    this.walletsService.getWallets().subscribe(res => {
       this.walletsData = res;
     })
   }
 
+  clickAddWallet() {
+    this.formValue.reset();
+    this.showAdd = true;
+    // this.walletsService.setShowAdd(true);
+    // this.showAdd = this.walletsService.getShowAdd();
+  }
+
+   postWalletDetails() {
+    this.walletModelObj.name = this.formValue.value.walletName;
+    // this.walletsData[0].name = this.formValue.value.walletName;
+    this.walletModelObj.owner = this.formValue.value.ownerName;
+    // this.walletsData[0].owner = this.formValue.value.ownerName;
+    this.walletModelObj.description = this.formValue.value.walletDescription;
+    // this.walletsData[0].description = this.formValue.value.walletDescription;
+
+    this.walletsService.postWallet(this.walletModelObj)
+    .subscribe(res => {
+      console.log(this.walletModelObj);
+      alert("Wallet Added Succesfully");
+      let ref = document.getElementById('cancel');
+      ref?.click() ;
+      this.formValue.reset();
+      this.walletsData.push(res);
+    },
+    err => {
+      alert("Something went wrong");
+    })
+  }
+
   deleteWallet(wallet: any) {
-    this.api.deleteWallet(wallet.id).subscribe(res => {
+    this.walletsService.deleteWallet(wallet.id).subscribe(res => {
       alert('Wallet Deleted Succesfully');
       this.getAllWallets();
     });
   }
-  
-  // getWallets(): void {
-  //   this.walletsService.getWallets().subscribe( (res) => {
-  //     this.wallets = res;
-  //   });
-  // }
 
-  // editWallet(wallet: any) {
-  //   console.log(wallet);
-  // }
+  onEdit(wallet: any) {
+    this.showAdd = false;
+    // this.walletsService.setShowAdd(false);
+    // this.showAdd = this.walletsService.getShowAdd();
 
-  // callOnEdit(): void {
-  //   this.editEvent.next('')
-  // }
+    this.walletModelObj.id = wallet.id;
+    this.formValue.controls['walletName'].setValue(wallet.name);
+    this.formValue.controls['ownerName'].setValue(wallet.owner);
+    this.formValue.controls['walletDescription'].setValue(wallet.description);
+  }
 
+  updateWalletDetails(){
+    this.walletModelObj.name = this.formValue.value.walletName;
+    this.walletModelObj.owner = this.formValue.value.ownerName;
+    this.walletModelObj.description = this.formValue.value.walletDescription;
+
+    this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)
+    .subscribe(res => {
+      alert("Updated Succesfully");
+      let ref = document.getElementById('cancel');
+      ref?.click() ;
+      this.formValue.reset(); 
+      this.getAllWallets();
+    });
+  }
 }

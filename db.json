@@ -2,9 +2,9 @@
   "wallets": [
     {
       "id": 1,
-      "name": "Wallet for holidays",
-      "owner": "Albert",
-      "description": "Try to grow it, keep it safe!"
+      "name": "Wallet For Games",
+      "owner": "Ciubi",
+      "description": "This is a walletfor games"
     },
     {
       "id": 2,
@@ -17,12 +17,6 @@
       "name": "Wallet for investments",
       "owner": "Mihaa",
       "description": "To multily your money, you need to invest them"
-    },
-    {
-      "id": 4,
-      "name": "dadada2",
-      "owner": "dadadad2",
-      "description": "dadadada2"
     }
   ],
   "transactions": [

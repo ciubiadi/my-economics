@@ -19,38 +19,56 @@
         </div>
       </div>
       <hr>
-      <div class="transactions-list">
-        <mat-tab-group mat-align-tabs="start" color="accent" backgroundColor="primary">
+      <div class="transactions-list" style="margin-bottom:2em;">
+        <mat-tab-group mat-align-tabs="start" color="accent" backgroundColor="primary" style="margin: 1.5em 0;border-radius:6px;">
           <mat-tab label="Expenses">
-            <ul>
-              <li>50RON - Skin LoL</li>
-              <li>20RON - Mancare Lidl</li>
-              <li>168RON - Chitara Electro-Acustica</li>
-              <li>320RON - Korg Pa2x Pro Elite Sintetizator hibrid</li>
-              <li>50RON - Amplificator Chitara Electro Acustica</li>
-            </ul>
+            <div class="list-of">
+              <div *ngFor="let expense of expenses" class="transaction" style="border:1px solid yellow; margin: 1em 0; padding: 10px">
+                <div class="details" style="height: auto;display:inline-block">
+                  <h3>{{ expense.date }}</h3>
+                  <h2>{{ expense.title }}</h2>
+                  <p>{{ expense.description }}(Description/Category) : walletId - {{ expense.walletId }}</p>
+                </div>
+                <div class="amount" style="float:right">
+                 -{{ expense.amount }} {{ expense.currency }}
+                </div>
+              </div>
+            </div>
           </mat-tab>
           <mat-tab label="Incomes">
-            <ul>
-              <li>321RON - Skin LoL</li>
-              <li>22RON - Mancare Lidl</li>
-              <li>1612RON - Chitara Electro-Acustica</li>
-              <li>320RON - Korg Pa2x Pro Elite Sintetizator hibrid</li>
-              <li>52RON - Amplificator Chitara Electro Acustica</li>
-            </ul>
+            <div class="list-of">
+              <div *ngFor="let income of incomes" class="transaction" style="border:1px solid yellow; margin: 1em 0; padding: 10px">
+                <div class="details" style="height: auto;display:inline-block">
+                  <h3>{{ income.date }}</h3>
+                  <h2>{{ income.title }}</h2>
+                  <p>{{ income.description }}(Description/Category) : walletId - {{ income.walletId }}</p>
+                </div>
+                <div class="amount" style="float:right">
+                 +{{ income.amount }} {{ income.currency }}
+                </div>
+              </div>
+            </div>
           </mat-tab>
           <mat-tab label="All">
-            <ul>
-              <li>30RON - Skin LoL</li>
-              <li>20RON - Mancare Lidl</li>
-              <li>168RON - Chitara Electro-Acustica</li>
-              <li>320RON - Korg Pa2x Pro Elite Sintetizator hibrid</li>
-              <li>50RON - Amplificator Chitara Electro Acustica</li>
-            </ul>
+            <div class="list-of">
+              <div *ngFor="let transaction of transactionsData" class="transaction" style="border:1px solid yellow; margin: 1em 0; padding: 10px">
+                <div class="details" style="height: auto;display:inline-block">
+                  <h3>{{ transaction.date }}</h3>
+                  <h2>{{ transaction.title }}</h2>
+                  <p>{{ transaction.description }}(Description/Category) : walletId - {{ transaction.walletId }}</p>
+                </div>
+                <div class="amount" style="float:right">
+                  <span *ngIf="(transaction.type == 'expense'); else isIncome">-</span>
+                  <ng-template #isIncome>+</ng-template>
+                    {{ transaction.amount }} {{ transaction.currency }}
+                </div>
+              </div>
+            </div>
           </mat-tab>
         </mat-tab-group>
       </div>
-      <mat-accordion class="example-headers-align" multi>
+      <mat-accordion class="example-headers-align">
+        <h1 style="text-align: center;">Add Transactions</h1>
         <mat-expansion-panel style="border: 1px solid red;">
           <mat-expansion-panel-header>
             <mat-panel-title>

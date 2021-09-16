@@ -22,37 +22,51 @@
   "transactions": [
     {
       "id": 1,
+      "title": "Car Injectors",
       "type": "expense",
       "walletId": 2,
-      "date": "",
-      "description": "some",
+      "date": "01.01.2020",
+      "description": "some description for first expense",
       "amount": 23,
       "currency": "EUR"
     },
     {
       "id": 2,
+      "title":"Freelancer Website Project",
       "type": "income",
       "walletId": 3,
-      "date": "",
-      "description": "",
+      "date": "02.01.2020",
+      "description": "Another income ca bogatii",
       "amount": 18.24,
       "currency": "RON"
     },
     {
       "id": 3,
-      "type": "income",
+      "title": "SEO Services",
+      "type": "expense",
       "walletId": 3,
-      "date": "",
-      "description": "",
+      "date": "03.01.2020",
+      "description": "Some Income Description",
       "amount": 18.24,
       "currency": "RON"
     },
     {
       "id": 4,
+      "title": "Music Show Pub",
       "type": "income",
       "walletId": 3,
-      "date": "",
-      "description": "",
+      "date": "04.01.2020",
+      "description": "Another income id 4",
+      "amount": 18.24,
+      "currency": "RON"
+    },
+    {
+      "id": 5,
+      "title": "League Of Legends Skin",
+      "type": "expense",
+      "walletId": 2,
+      "date": "05.01.2020",
+      "description": "Katarina skin for new account",
       "amount": 18.24,
       "currency": "RON"
     }

@@ -46,6 +46,27 @@ export class WalletsService {
         return res;
       }))
     }
+
+    getWallet(id: number) {
+      return this.http.get<any>("http://localhost:3000/wallets/" + id)
+      .pipe(map((res : any) => {
+        return res;
+      }))
+    }
+
+    getWalletTransactions(id: number) {
+      return this.http.get<any>("http://localhost:3000/wallets/" + id + "/transactions")
+      .pipe(map((res : any) => {
+        return res;
+      }))
+    }
+
+    getWalletTransactionsType(id: number, type: string) {
+      return this.http.get<any>("http://localhost:3000/wallets/" + id + "/transactions?type=" + type)
+      .pipe(map((res : any) => {
+        return res;
+      }))
+    }
     
       // public getWallets(): Observable<Wallet[]> {
   //   return this.http.get<Wallet[]>('http://localhost:3000/wallets');
@@ -70,34 +91,6 @@ export class WalletsService {
   //     this.walletsData = res;
   //   });
   // }
-
-      /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-       private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-    
-          // TODO: send the error to remote logging infrastructure
-          console.error(error); // log to console instead
-    
-          // TODO: better job of transforming error for user consumption
-          console.log(`${operation} failed: ${error.message}`);
-    
-          // Let the app keep running by returning an empty result.
-          return of(result as T);
-        };
-      }
-
-  public getWallet(id: number): Observable<WalletModel> {
-    const url = `${this.walletsUrl}/${id}`;
-    return this.http.get<WalletModel>(url).pipe(
-      tap(_ => console.log(`fetched wallet id=${id}`)),
-      catchError(this.handleError<WalletModel>(`getWallet id=${id}`))
-    );
-  }
 }
 
 // export interface Wallet {

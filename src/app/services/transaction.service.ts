@@ -9,15 +9,15 @@ export class TransactionService {
 
   constructor(private http : HttpClient) { }
 
-  postTransaction(data : any) {
-    return this.http.post<any>("http://localhost:3000/transactions", data)
+  getTransactions() {
+    return this.http.get<any>("http://localhost:3000/transactions")
     .pipe(map((res : any) => {
       return res;
     }))
   }
 
-  getTransactions() {
-    return this.http.get<any>("http://localhost:3000/transactions")
+  postTransaction(data : any) {
+    return this.http.post<any>("http://localhost:3000/transactions", data)
     .pipe(map((res : any) => {
       return res;
     }))

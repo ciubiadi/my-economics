@@ -12,6 +12,7 @@ import { WalletModel } from 'src/app/models/wallet.model';
   styleUrls: ['./wallets.component.scss']
 })
 export class WalletsComponent implements OnInit {
+  walletWord !: any;
   
   formValue !: FormGroup;
   walletModelObj : WalletModel = new WalletModel();
@@ -90,7 +91,7 @@ export class WalletsComponent implements OnInit {
     this.walletModelObj.name = this.formValue.value.walletName;
     this.walletModelObj.owner = this.formValue.value.ownerName;
     this.walletModelObj.description = this.formValue.value.walletDescription;
-
+ 
     this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)
     .subscribe(res => {
       alert("Updated Succesfully");

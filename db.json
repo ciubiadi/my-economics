@@ -17,6 +17,12 @@
       "name": "Wallet for investments",
       "owner": "Mihaa",
       "description": "To multily your money, you need to invest them"
+    },
+    {
+      "id": 4,
+      "name": "Wallet For Skins",
+      "owner": "Ciubi",
+      "description": "dascwefasd"
     }
   ],
   "transactions": [
@@ -25,17 +31,17 @@
       "title": "Car Injectors",
       "type": "expense",
       "walletId": 2,
-      "date": "01.01.2020",
+      "date": "01-01-2020",
       "description": "some description for first expense",
       "amount": 23,
       "currency": "EUR"
     },
     {
       "id": 2,
-      "title":"Freelancer Website Project",
+      "title": "Freelancer Website Project",
       "type": "income",
       "walletId": 3,
-      "date": "02.01.2020",
+      "date": "02-01-2020",
       "description": "Another income ca bogatii",
       "amount": 18.24,
       "currency": "RON"
@@ -45,7 +51,7 @@
       "title": "SEO Services",
       "type": "expense",
       "walletId": 3,
-      "date": "03.01.2020",
+      "date": "03-01-2020",
       "description": "Some Income Description",
       "amount": 18.24,
       "currency": "RON"
@@ -55,7 +61,7 @@
       "title": "Music Show Pub",
       "type": "income",
       "walletId": 3,
-      "date": "04.01.2020",
+      "date": "04-01-2020",
       "description": "Another income id 4",
       "amount": 18.24,
       "currency": "RON"
@@ -65,7 +71,7 @@
       "title": "League Of Legends Skin",
       "type": "expense",
       "walletId": 2,
-      "date": "05.01.2020",
+      "date": "05-01-2020",
       "description": "Katarina skin for new account",
       "amount": 18.24,
       "currency": "RON"

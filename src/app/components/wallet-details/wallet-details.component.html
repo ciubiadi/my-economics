@@ -1,8 +1,8 @@
 <div class="container d-flex justify-content-center">
   <mat-card class="example-card">
     <mat-card-header>
-      <div *ngIf="wallet">
-        <h2>{{wallet.name | uppercase}} Details</h2>
+      <div>
+        <h2>{{ walletData.name }} Details</h2>
         <!-- <div><span>id: </span>{{wallet.id}}</div> -->
       </div>
     </mat-card-header>
@@ -23,46 +23,85 @@
         <mat-tab-group mat-align-tabs="start" color="accent" backgroundColor="primary" style="margin: 1.5em 0;border-radius:6px;">
           <mat-tab label="Expenses">
             <div class="list-of">
-              <div *ngFor="let expense of expenses" class="transaction" style="border:1px solid yellow; margin: 1em 0; padding: 10px">
+              <mat-card *ngFor="let expense of expenses" class="transaction" style="border:0.2px solid brown; margin: 1em 0; padding: 10px">
                 <div class="details" style="height: auto;display:inline-block">
                   <h3>{{ expense.date }}</h3>
                   <h2>{{ expense.title }}</h2>
                   <p>{{ expense.description }}(Description/Category) : walletId - {{ expense.walletId }}</p>
                 </div>
                 <div class="amount" style="float:right">
-                 -{{ expense.amount }} {{ expense.currency }}
+                  <div class="sum">
+                    -{{ expense.amount }} {{ expense.currency }}
+                  </div>
+                  <div class="actions">
+                    <button mat-raised-button color="primary" style="background-color: green;">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-raised-button style="background: lightblue; color: #fff">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-raised-button color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </mat-card>
             </div>
           </mat-tab>
           <mat-tab label="Incomes">
             <div class="list-of">
-              <div *ngFor="let income of incomes" class="transaction" style="border:1px solid yellow; margin: 1em 0; padding: 10px">
+              <mat-card *ngFor="let income of incomes" class="transaction" style="border:0.2px solid brown; margin: 1em 0; padding: 10px">
                 <div class="details" style="height: auto;display:inline-block">
                   <h3>{{ income.date }}</h3>
                   <h2>{{ income.title }}</h2>
                   <p>{{ income.description }}(Description/Category) : walletId - {{ income.walletId }}</p>
                 </div>
                 <div class="amount" style="float:right">
-                 +{{ income.amount }} {{ income.currency }}
+                  <div class="sum">
+                   +{{ income.amount }} {{ income.currency }}
+                  </div>
+                  <div class="actions">
+                    <button mat-raised-button color="primary" style="background-color: green;">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-raised-button style="background: lightblue; color: #fff">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-raised-button color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </mat-card>
             </div>
           </mat-tab>
           <mat-tab label="All">
             <div class="list-of">
-              <div *ngFor="let transaction of transactionsData" class="transaction" style="border:1px solid yellow; margin: 1em 0; padding: 10px">
+              <mat-card *ngFor="let transaction of transactionsData" class="transaction" style="border:0.2px solid brown; margin: 1em 0; padding: 10px">
                 <div class="details" style="height: auto;display:inline-block">
                   <h3>{{ transaction.date }}</h3>
                   <h2>{{ transaction.title }}</h2>
                   <p>{{ transaction.description }}(Description/Category) : walletId - {{ transaction.walletId }}</p>
                 </div>
                 <div class="amount" style="float:right">
-                  <span *ngIf="(transaction.type == 'expense'); else isIncome">-</span>
-                  <ng-template #isIncome>+</ng-template>
+                  <div class="sum">
+                    <span *ngIf="(transaction.type == 'expense'); else isIncome">-</span>
+                    <ng-template #isIncome>+</ng-template>
                     {{ transaction.amount }} {{ transaction.currency }}
+                  </div>
+                  <div class="actions">
+                    <button mat-raised-button color="primary" style="background-color: green;">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-raised-button style="background: lightblue; color: #fff">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-raised-button color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </mat-card>
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -72,63 +111,57 @@
         <mat-expansion-panel style="border: 1px solid red;">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Expenses
+              Complete the below fields
             </mat-panel-title>
             <mat-panel-description>
-              Type an expense
+              Type the transaction details
             </mat-panel-description>
           </mat-expansion-panel-header>
-      
-          <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <input matInput>
-          </mat-form-field>
-      
-          <mat-form-field appearance="fill">
-            <mat-label>Value</mat-label>
-            <input matInput type="number" min="0">
-          </mat-form-field>
-
-          <!-- <mat-form-field appearance="fill">
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-          </mat-form-field>
-          <mat-datepicker #picker></mat-datepicker> -->
-          <!-- <button mat-stroked-button color="primary">Add</button> -->
-        </mat-expansion-panel>
-
-        <mat-expansion-panel style="border: 1px solid green;">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Incomes
-            </mat-panel-title>
-            <mat-panel-description>
-              Type an income
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-      
-          <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <input matInput>
-          </mat-form-field>
-      
-          <mat-form-field appearance="fill">
-            <mat-label>Value</mat-label>
-            <input matInput type="number" min="0">
-          </mat-form-field>
-
-          <!-- <mat-form-field appearance="fill">
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-          </mat-form-field>
-          <mat-datepicker #picker></mat-datepicker> -->
-      
-          <!-- <button mat-raised-button color="primary">Add</button> -->
+          <form [formGroup]="formTransaction">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Title</mat-label>
+                  <input matInput formControlName="transactionTitle">
+                </mat-form-field>
+              </div>
+              <div class="form-group col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="transactionDescription">
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field appearance="fill">
+                  <mat-label>Value</mat-label>
+                  <input matInput type="number" min="0" formControlName="transactionAmount">
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Transaction Type</mat-label>
+                  <mat-select formControlName="transactionType">
+                    <mat-option value="income">Income</mat-option>
+                    <mat-option value="expense">Expense</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field appearance="fill">
+                  <mat-label>Currency</mat-label>
+                  <input matInput formControlName="transactionCurrency">
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+          <button mat-raised-button color="primary" (click)="postTransaction()">Add</button>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>
     <mat-card-actions>
-      <button (click)="goBack()">go back</button>
+      <button mat-button class="go-back-btn" (click)="goBack()">
+        <mat-icon>keyboard_backspace</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

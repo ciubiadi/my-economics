@@ -23,6 +23,9 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select'
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HttpClientModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

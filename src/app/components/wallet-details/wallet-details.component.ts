@@ -8,7 +8,7 @@ import { WalletsService } from 'src/app/services/wallets.service';
 import { WalletModel } from 'src/app/models/wallet.model';
 import { TransactionModel } from 'src/app/models/transaction.model';
 import { TransactionService } from 'src/app/services/transaction.service';
-
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 // interface Transaction {
 //   item: string;
 //   cost: number;
@@ -20,19 +20,17 @@ import { TransactionService } from 'src/app/services/transaction.service';
   styleUrls: ['./wallet-details.component.scss']
 })
 export class WalletDetailsComponent implements OnInit {
-  wallet: WalletModel | undefined;
-
-  // displayedColumns: string[] = ['item', 'cost'];
-  // transactions: Transaction[] = [
-  //   {item: 'Beach ball', cost: 4},
-  //   {item: 'Towel', cost: 5},
-  //   {item: 'Frisbee', cost: 2},
-  //   {item: 'Sunscreen', cost: 4},
-  //   {item: 'Cooler', cost: 25},
-  //   {item: 'Swim suit', cost: 15},
-  // ];
-  transactionModelObj : TransactionModel | undefined;
+  
+  walletData !: any;
+  walletModelObj : WalletModel = new WalletModel();
   transactionsData !: any;
+  transactionModelObj : TransactionModel = new TransactionModel();
+  // transactionModelObj : TransactionModel | undefined;
+
+  formTransaction !: FormGroup;
+  options!: FormGroup;
+  colorControl = new FormControl('primary');
+
 
   expenses : any;
   incomes : any;
@@ -43,23 +41,31 @@ export class WalletDetailsComponent implements OnInit {
     private transactionsService: TransactionService,
     private api : ApiService,
     private route: ActivatedRoute,
-    private location: Location
-    ) { 
+    private location: Location,
+    private formBuilder: FormBuilder
+    ) {
+      this.options = formBuilder.group({
+        color: this.colorControl
+      });
     }
     
     ngOnInit(): void {
+    this.getWallet();
     this.getWalletTransactions();
     this.getWalletExpenses();
     this.getWalletIncomes();
+    this.formTransaction =  this.formBuilder.group({
+      transactionTitle : [''],
+      transactionDescription : [''],
+      transactionAmount : [''],
+      transactionType : ['']
+    })
   }
-  // getTotalCost() {
-  //   return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
-  // }
 
   getWallet(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     this.walletsService.getWallet(id)
-      .subscribe(wallet => this.wallet = wallet);
+      .subscribe(res => this.walletData = res);
   }
 
   getWalletTransactions(): void {
@@ -80,10 +86,35 @@ export class WalletDetailsComponent implements OnInit {
     .subscribe(res => this.incomes = res);
   }
 
-  // getWallet(): void {
+  postTransaction() {
+    const id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
+    let date = new Date('dd/mm/yyyy');
+    let finalDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
+    console.log(finalDate);
+    this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
+    // this.walletsData[0].name = this.formValue.value.walletName;
+    this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
+    // this.walletsData[0].owner = this.formValue.value.ownerName;
+    this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
+    this.transactionModelObj.type = this.formTransaction.value.transactionType;
+    this.transactionModelObj.walletId = id;
+    this.transactionModelObj.date = new Date();
+    this.transactionModelObj.currency = this.formTransaction.value.transactionCurrency;
 
-  // }
 
+    this.transactionsService.postTransaction(this.transactionModelObj)
+    .subscribe(res => {
+      console.log(this.transactionModelObj);
+      alert("Transaction Added Succesfully");
+      this.formTransaction.reset();
+      this.transactionsData.push(res);
+      this.getWalletTransactions();
+    },
+    err => {
+      alert("Something went wrong");
+    })
+  }
+  
   goBack(): void {
     this.location.back();
   }

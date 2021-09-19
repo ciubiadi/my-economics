@@ -19,7 +19,7 @@
       <mat-card-subtitle>{{ wallet.description }}</mat-card-subtitle>
       <button mat-stroked-button color="primary" routerLink="/wallets/{{ wallet.id }}" style="float:left">Open Wallet</button>
       <mat-card-actions align="end" class="actions">
-        <button mat-button (click)="onEdit(wallet)" data-toggle="modal" data-target="#exampleModal" mat-stroked-button color="accent">Edit</button>
+        <button (click)="onEdit(wallet)" data-toggle="modal" data-target="#exampleModal" mat-stroked-button color="accent">Edit</button>
         <button mat-raised-button color="warn" (click)="deleteWallet(wallet)">Delete</button>
       </mat-card-actions>
     </mat-card>
